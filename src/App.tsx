@@ -5,6 +5,7 @@ import { createServer, Model } from "miragejs"
 import Modal from 'react-modal';
 import { useState } from "react";
 import { TransactionModal } from "./components/NewTransactionModal";
+import { TransactionProvider } from "./hooks/useTransactions";
 
 createServer({
   models: {
@@ -62,14 +63,14 @@ export function App() {
   }
 
   return (
-    <>
+    <TransactionProvider>
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
       <GlobalStyles />
       <TransactionModal 
         isOpen={isNewTransactionModalOpen} 
         onRequestClose={handleCloseNewTransactionModal} />
-    </>
+    </TransactionProvider>
   );
 }
 
